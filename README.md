@@ -25,6 +25,21 @@ Docker Image script file is ready. So backend can create Docker Image and deploy
 
 CORS is enabled in this API backend. All origins are allowed to post data in this server.
 
+## About Setup
+
+### FrontEnd
+
+1. Install NodeJS
+2. On Command Prompt, go to the directory and setup all necessary modules by typing "npm install"
+3. Type "ng serve"
+
+### BackEnd
+
+1. Open Solution File "Infotrack.sln" in Visual Studio 2019
+2. Build Solution
+3. Deploy Solution to your Docker Repository
+4. Start Docker Image from your Docker Repository
+
 
 
 
