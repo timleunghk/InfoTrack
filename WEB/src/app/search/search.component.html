@@ -1,0 +1,102 @@
+<form [formGroup]="form"   (ngSubmit)="searchData()">
+<div class="container">
+    <div class="jumbotron">
+        <h1>InfoTrack SEO Tracking</h1>
+        <h2>Enquiry Page</h2>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Selection Criteria</div>
+        <div class="panel-body">   
+                <label for="keyword">Keyword</label>
+                <input
+                    formControlName="keywords"
+                    id="keywords"
+                    type="text"
+                    class="form-control">
+                <div *ngIf="f['keywords'].touched && f['keywords'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['keywords'].errors && f['keywords'].errors['required']">Please provide a keyword</div>
+                </div>
+                <label for="url">Web Address (URL)</label>
+                <input
+                    formControlName="url"
+                    id="url"
+                    type="text"
+                    class="form-control">                
+                <div *ngIf="f['url'].touched && f['url'].invalid"  class="alert alert-danger">
+                    <div *ngIf="f['url'].errors && f['url'].errors['pattern']">Please provide a URL Address</div>
+                </div>
+            
+                <div class="d-grid mt-3">
+                    <button class="btn btn-primary"  [disabled]="!form.valid" type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" (click)="resetForm()">Reset</button>
+                  </div>
+        </div>    
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf="!searchViewDetail && isSubmitted ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Result</div>
+            <div class="panel-body">   
+                Unexcepted Error is found, please contact your administrator
+            </div>
+        </div>
+    </div>
+    <div *ngIf="searchViewDetail && searchViewDetail.length==0  && isSubmitted ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Result</div>
+            <div class="panel-body">   
+               No Record Found
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="searchViewDetail && searchViewDetail.length>0  && isSubmitted ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Result</div>
+            <div class="panel-body">   
+                <div *ngIf="searchViewDetail.length>0">
+                Total number of record : {{searchViewDetail.length}}
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Location Number</th>
+                            <th>Title</th>
+                            <th>URL Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let result of searchViewDetail">
+                            <td>{{result.number}}</td>
+                            <td>{{result.title}}</td>
+                            <td>{{result.url}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>         
+        </div>
+        
+    </div>
+
+
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-circus">  
+    <p style="color: white">Please Wait. </p>  
+</ngx-spinner>
+</form>
+
+
+
+
+
+
+   
+

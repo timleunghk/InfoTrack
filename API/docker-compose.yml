@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  infotrack:
+    image: ${DOCKER_REGISTRY-}infotrack
+    build:
+      context: .
+      dockerfile: Dockerfile
