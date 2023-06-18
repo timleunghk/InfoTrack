@@ -1,4 +1,4 @@
-﻿using Infotrack.Interfaces;
+using Infotrack.Interfaces;
 using InfoTrack.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,16 +29,17 @@ namespace Infotrack.Services
         {
             var results = new List<SearchResult>();
             var resultNumber = 1;
-            var startTag = "<div class=\"BNeawe UPmit AP7Wnd\">";
+            
+            var startTag = "<div><div><div class=\"BNeawe s3v9rd AP7Wnd\">";
             var endTag = "</div>";
-
-            var startTagTitle = "<div class=\"BNeawe vvjwJb AP7Wnd\">";
-            var startTagTitleIndex = source.IndexOf(startTagTitle) + startTagTitle.Length;
-
             var startTagIndex = source.IndexOf(startTag) + startTag.Length;
             var endTagIndex = source.IndexOf(endTag, startTagIndex);
 
-            var endTagTitleIndex = source.IndexOf(endTag, startTagTitleIndex);
+            var startTagUrl = "<div class=\"BNeawe UPmit AP7Wnd lRVwie\">";
+            var startTagUrlIndex = source.IndexOf(startTagUrl) + startTagUrl.Length;
+            var endTagUrlIndex = source.IndexOf(endTag, startTagUrlIndex);
+
+ 
 
             var currentIndex = 1;
 
@@ -47,15 +48,18 @@ namespace Infotrack.Services
                 string text = source.Substring(startTagIndex, endTagIndex - startTagIndex);
                 text = HttpUtility.HtmlDecode(text).Replace(" › ", "/");
 
-                string title = source.Substring(startTagTitleIndex, endTagTitleIndex - startTagTitleIndex);
-                title = HttpUtility.HtmlDecode(title).Replace(" › ", "/");
+                string resultUrl = source.Substring(startTagUrlIndex, endTagUrlIndex - startTagUrlIndex);
+                resultUrl = HttpUtility.HtmlDecode(resultUrl).Replace(" › ", "/");
 
-                if (text.Contains(targetUrl)) results.Add(new SearchResult() { Number = resultNumber, Url = text , Title=title});
+                if (resultUrl.Contains(targetUrl)) results.Add(new SearchResult() { Number = resultNumber, Url = resultUrl, Title = text });
 
                 currentIndex = endTagIndex + 1;
 
                 startTagIndex = source.IndexOf(startTag, currentIndex) + startTag.Length;
                 endTagIndex = source.IndexOf(endTag, startTagIndex);
+
+                startTagUrlIndex = source.IndexOf(startTagUrl, currentIndex) + startTagUrl.Length;
+                endTagUrlIndex = source.IndexOf(endTag, startTagUrlIndex);
 
                 resultNumber++;
             }
