@@ -51,7 +51,7 @@ namespace Infotrack.Services
                 string resultUrl = source.Substring(startTagUrlIndex, endTagUrlIndex - startTagUrlIndex);
                 resultUrl = HttpUtility.HtmlDecode(resultUrl).Replace(" › ", "/");
 
-                //Result: If resultUrl contains targetUrl enitity value then output JSON result here
+                //Result: If resultUrl contains targetUrl enitity value then output JSON result here 2023/6/18
                 if (resultUrl.Contains(targetUrl)) results.Add(new SearchResult() { Number = resultNumber, Url = resultUrl, Title = text });
 
                 currentIndex = endTagIndex + 1;
